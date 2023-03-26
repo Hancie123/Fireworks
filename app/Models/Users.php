@@ -16,4 +16,10 @@ class Users extends Model
     {
         return $this->hasMany(RoomsModel::class, 'User_ID');
     }
+
+
+    public function customers()
+    {
+        return $this->hasMany(Customers::class, 'User_ID');
+    }
 }

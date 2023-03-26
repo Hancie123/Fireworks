@@ -313,7 +313,7 @@
                                         href="{{url('/admin/customers/create')}}">Create
                                         Accounts</a>
                                 </li>
-                                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">View
+                                <li class="nav-item"> <a class="nav-link" href="{{url('/admin/customers/view')}}">View
                                         Customers</a>
                                 </li>
 

@@ -45,6 +45,9 @@ Route::get('/roomsdata', function () {
 
 
 Route::get('/admin/customers/create',[customercontroller::class,'customer'])->middleware('isLoggedIn');
+Route::post('/admin/customers/create',[customercontroller::class,'insertdata'])->middleware('isLoggedIn');
+Route::get('/admin/customers/ajax',[customercontroller::class,'getCustomers'])->middleware('isLoggedIn');
+Route::get('/admin/customers/view',[customercontroller::class,'viewcustomer'])->middleware('isLoggedIn');
 
 
 

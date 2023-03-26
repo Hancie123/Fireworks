@@ -13,11 +13,11 @@
 
 
         <div class="container border p-4 w3-round">
-            <form method="post" action="{{url('/admin/workers/create')}}">
-
+            <form method="post" action="{{url('/admin/customers/create')}}">
                 @csrf
 
-                <input type="hidden" value="Active" name="status">
+                <input type="hidden" value="{{Session::get('User_ID')}}" name="User_ID" type="text">
+                <input type="hidden" value="<?php echo date('Y-m-d'); ?>" name="date" type="text">
                 <div class="row">
                     <div class="col-md-6">
                         <label>Name</label>
@@ -47,9 +47,9 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label>Facebook Link</label>
-                        <input class="w3-input w3-border w3-round" name="password" type="text">
+                        <input class="w3-input w3-border w3-round" name="facebook_link" type="text">
                         <span class="text-danger">
-                            @error('password')
+                            @error('facebook_link')
                             {{$message}}
                             </script>
                             @enderror
@@ -58,7 +58,13 @@
 
                     <div class="col-md-6">
                         <label>Mobile No</label>
-                        <input class="w3-input w3-border w3-round" type="text" name="role">
+                        <input class="w3-input w3-border w3-round" type="text" name="mobile">
+                        <span class="text-danger">
+                            @error('mobile')
+                            {{$message}}
+                            </script>
+                            @enderror
+                        </span>
                     </div><br>
                 </div>
                 <br>
@@ -66,11 +72,17 @@
                     <div class="col-md-6">
                         <label>Room Name</label>
 
-                        <select class="select2 w3-select w3-border w3-round" name="room_id">
+                        <select class="select2 form-control" name="room_id">
                             @foreach($rooms as $room)
                             <option value="{{ $room->room_id }}">{{ $room->room_name }}</option>
                             @endforeach
                         </select>
+                        <span class="text-danger">
+                            @error('room_id')
+                            {{$message}}
+                            </script>
+                            @enderror
+                        </span>
 
                     </div>
 
@@ -80,7 +92,10 @@
                 </div>
 
                 <br>
+
                 <button type="submit" class="btn btn-primary mb-2">Create</button><br>
+
+
                 @if(Session::has('success'))
                 <div class="alert alert-success w3-display-bottommiddle">
                     <strong>Success!</strong> {{Session::get('success')}}
@@ -97,36 +112,50 @@
         <br><br>
 
         <table class="table table-hover table-striped" id="table_data">
-            <thead class="w3-center">
+            <thead>
                 <tr>
-                    <th>Worker ID</th>
-                    <th>Name</th>
+                    <th>Customer Name</th>
+                    <th>Room Name</th>
+
+                    <th>Facebook Link</th>
                     <th>Email</th>
+                    <th>Phone</th>
+                    <th>Date</th>
+                    <th>Created by</th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- Data will be displayed here -->
-            </tbody>
         </table>
 
         <script>
         $(document).ready(function() {
             $('#table_data').DataTable({
-                'ajax': '/admin/workers/ajax',
-                'columns': [{
-                        'data': 'User_ID'
+                ajax: '/admin/customers/ajax',
+                columns: [{
+                        data: 'customer_name'
                     },
                     {
-                        'data': 'name'
+                        data: 'room.room_name'
+                    },
+
+                    {
+                        data: 'facebook_link'
                     },
                     {
-                        'data': 'email'
+                        data: 'email'
+                    },
+                    {
+                        data: 'phone'
+                    },
+                    {
+                        data: 'date'
+                    },
+                    {
+                        data: 'user.name'
                     }
                 ]
             });
         });
         </script>
-
 
         <style>
         /* Change the background color of the table header */
@@ -169,15 +198,10 @@
 </div>
 
 
-
-
-
-
 <script>
 $(document).ready(function() {
     $('.select2').select2({
-        placeholder: 'Select an option',
-        width: '100%'
+        placeholder: 'Select an option'
     });
 });
 </script>
@@ -186,11 +210,6 @@ $(document).ready(function() {
 
 
 
-
-
-
-
-<body>
 
 
 </body>

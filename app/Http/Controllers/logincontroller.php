@@ -34,7 +34,7 @@ class logincontroller extends Controller
             return back()->with('fail','The user account is deleted already');
             
         }
-
+        // Check the hashing password and validate
         if (!Hash::check($credentials['password1'], $user->password)) {
             return back()->with('fail','The password does not match');
         }
