@@ -303,7 +303,8 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#managecustomers" aria-expanded="false"
                             aria-controls="managecustomers">
-                            <i class='bx bx-layout bx-sm mx-1'></i>
+
+                            <i class='bx bx-user bx-sm mx-1'></i>
                             <span class="menu-title">Manage Customers</span>
                             <i class='bx bx-chevron-right'></i>
                         </a>
@@ -334,7 +335,28 @@
                                         href="{{url('/admin/products/create')}}">Create
                                         Products</a>
                                 </li>
-                                <li class="nav-item"> <a class="nav-link" href="{{url('/admin/customers/view')}}">View
+                                <li class="nav-item"> <a class="nav-link" href="{{url('/admin/products/view')}}">View
+                                        Products</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#managepayment" aria-expanded="false"
+                            aria-controls="managepayment">
+                            <i class='bx bx-dollar-circle bx-sm mx-1'></i>
+                            <span class="menu-title">Manage Payment</span>
+                            <i class='bx bx-chevron-right'></i>
+                        </a>
+                        <div class="collapse" id="managepayment">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{url('/admin/products/create')}}">Create
+                                        Products</a>
+                                </li>
+                                <li class="nav-item"> <a class="nav-link" href="{{url('/admin/products/view')}}">View
                                         Products</a>
                                 </li>
 

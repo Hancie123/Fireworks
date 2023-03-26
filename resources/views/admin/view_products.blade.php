@@ -1,6 +1,6 @@
 @include('layouts.adminnav')
 @push('title')
-<title>Fire Wins Dashboard | Create Products</title>
+<title>Fire Wins | Create Products</title>
 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -16,84 +16,7 @@
 
 <div class="main-panel">
     <div class="content-wrapper">
-        <h3><b>Create Products</b></h3><br>
-
-
-
-        <div class="container border p-4 w3-round">
-            <form method="post" action="{{url('/admin/products/create')}}">
-                @csrf
-
-                <input type="hidden" value="{{Session::get('User_ID')}}" name="User_ID" type="text">
-                <input type="hidden" value="<?php echo date('Y-m-d'); ?>" name="date" type="text">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label>Product Name</label>
-                        <input class="w3-input w3-border w3-round" name="product_name" type="text">
-                        <span class="text-danger">
-                            @error('name')
-                            {{$message}}
-                            </script>
-                            @enderror
-                        </span>
-                    </div><br>
-
-                    <div class="col-md-6">
-                        <label>Product Balance</label>
-                        <input class="w3-input w3-border w3-round" name="balance" type="text">
-                        <span class="text-danger">
-                            @error('email')
-                            {{$message}}
-                            </script>
-                            @enderror
-                        </span>
-                    </div><br>
-                </div>
-                <br>
-
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <label>Room Name</label>
-                        <select class="select2 form-control" name="room_id">
-                            @foreach($rooms as $room)
-                            <option value="{{ $room->room_id }}">{{ $room->room_name }}</option>
-                            @endforeach
-                        </select>
-                        <span class="text-danger">
-                            @error('room_id')
-                            {{$message}}
-                            </script>
-                            @enderror
-                        </span>
-                    </div><br>
-
-                    <div class="col-md-6">
-
-                    </div><br>
-                </div>
-                <br>
-
-
-                <br>
-
-                <button type="submit" class="btn btn-primary mb-2">Create</button><br>
-
-
-                @if(Session::has('success'))
-                <div class="alert alert-success w3-display-bottommiddle">
-                    <strong>Success!</strong> {{Session::get('success')}}
-                </div>
-                @endif
-                @if(Session::has('fail'))
-                <div class="alert alert-danger w3-display-bottommiddle">
-                    <strong>Fail!</strong> {{Session::get('fail')}}
-                </div>
-                @endif
-            </form>
-
-        </div>
-        <br><br>
+        <h3><b>All Products</b></h3><br>
 
         <table class="table table-hover table-striped" id="table_data">
             <thead>
@@ -112,13 +35,27 @@
             $('#table_data').DataTable({
                 ajax: '/admin/products/ajax',
                 columns: [{
-                        data: 'product_id'
+                        data: 'product_id',
+                        searchable: true,
+                        orderable: true,
+                        select: {
+                            style: 'single',
+                            items: 'column'
+                        }
                     },
                     {
-                        data: 'product_name'
+                        data: 'product_name',
+                        searchable: true,
+                        orderable: true,
+                        select: {
+                            style: 'multi',
+                            items: 'column'
+                        }
                     },
                     {
-                        data: 'product_balance'
+                        data: 'product_balance',
+                        searchable: true,
+                        orderable: true
                     },
                     {
                         data: 'room_name',
@@ -127,7 +64,9 @@
                         }
                     },
                     {
-                        data: 'date'
+                        data: 'date',
+                        searchable: true,
+                        orderable: true
                     }
                 ],
                 dom: 'Bfrtip',
@@ -189,6 +128,24 @@
         .dataTables_wrapper .dt-buttons button:hover {
             background-color: #3e8e41;
             color: white;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            color: white;
+            background-color: #3f3e91;
+            border-color: #007bff;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            color: #fff;
+            background-color: #3e8e41;
+            border-color: #0056b3;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            color: white;
+            background-color: #3f3e91;
+            border-color: #0056b3;
         }
         </style>
     </div>

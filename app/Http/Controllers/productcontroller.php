@@ -56,5 +56,11 @@ class productcontroller extends Controller
 
         return response()->json(['data' =>$products]);
 }
+
+    public function viewproducts(){
+
+        return view('admin/view_products');
+        
+    }
     
 }
