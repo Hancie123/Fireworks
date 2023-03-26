@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <title>Fire Wins Dashboard</title>
+    @stack('title')
     <link rel="icon" href="{{url('assets/images/icons.png')}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -301,22 +301,22 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
-                            aria-controls="ui-basic">
+                        <a class="nav-link" data-toggle="collapse" href="#managecustomers" aria-expanded="false"
+                            aria-controls="managecustomers">
                             <i class='bx bx-layout bx-sm mx-1'></i>
-                            <span class="menu-title">Access Control</span>
+                            <span class="menu-title">Manage Customers</span>
                             <i class='bx bx-chevron-right'></i>
                         </a>
-                        <div class="collapse" id="ui-basic">
+                        <div class="collapse" id="managecustomers">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link"
-                                        href="pages/ui-features/buttons.html">Buttons</a>
+                                        href="{{url('/admin/customers/create')}}">Create
+                                        Accounts</a>
                                 </li>
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="pages/ui-features/dropdowns.html">Dropdowns</a>
+                                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">View
+                                        Customers</a>
                                 </li>
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="pages/ui-features/typography.html">Typography</a></li>
+
                             </ul>
                         </div>
                     </li>

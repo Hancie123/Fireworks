@@ -5,6 +5,7 @@ use App\Http\Controllers\logincontroller;
 use App\Http\Controllers\userscontroller;
 use App\Http\Controllers\admincontroller;
 use App\Http\Controllers\roomcontroller;
+use App\Http\Controllers\customercontroller;
 use App\Models\RoomsModel;
 use App\Models\Users;
 
@@ -41,6 +42,9 @@ Route::get('/roomsdata', function () {
                  ->get();
     return response()->json(['data' => $rooms]);
 });
+
+
+Route::get('/admin/customers/create',[customercontroller::class,'customer'])->middleware('isLoggedIn');
 
 
 
