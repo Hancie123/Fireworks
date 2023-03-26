@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\RoomsModel;
+use DB;
 
 class productcontroller extends Controller
 {
@@ -41,5 +42,19 @@ class productcontroller extends Controller
         }
         
     }
+
+    public function getProductsAndRooms()
+{
+    $products = DB::table('products')
+                    ->leftJoin('rooms', 'products.room_id', '=', 'rooms.room_id')
+                    ->select('products.product_id', 'products.product_name', 'products.product_balance', 'products.room_id', 'products.date', 'rooms.room_name')
+                    ->get()
+                    ->map(function ($product) {
+                        $product->product_balance = number_format($product->product_balance, 2);
+                        return $product;
+                    });
+
+        return response()->json(['data' =>$products]);
+}
     
 }

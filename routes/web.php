@@ -54,6 +54,7 @@ Route::get('/admin/customers/view',[customercontroller::class,'viewcustomer'])->
 
 Route::get('/admin/products/create',[productcontroller::class,'products'])->middleware('isLoggedIn');
 Route::post('/admin/products/create',[productcontroller::class,'insertdata'])->middleware('isLoggedIn');
+Route::get('/admin/products/ajax',[productcontroller::class,'getProductsAndRooms'])->middleware('isLoggedIn');
 
 
 

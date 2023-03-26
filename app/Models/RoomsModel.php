@@ -20,4 +20,10 @@ class RoomsModel extends Model
     {
         return $this->hasMany(Customers::class, 'room_id');
     }
+
+    public function products()
+{
+    return $this->hasMany(Products::class);
+}
+
 }

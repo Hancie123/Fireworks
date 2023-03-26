@@ -90,14 +90,11 @@
         <table class="table table-hover table-striped" id="table_data">
             <thead>
                 <tr>
-                    <th>Customer Name</th>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                    <th>Product Balance</th>
                     <th>Room Name</th>
-
-                    <th>Facebook Link</th>
-                    <th>Email</th>
-                    <th>Phone</th>
                     <th>Date</th>
-                    <th>Created by</th>
                 </tr>
             </thead>
         </table>
@@ -105,28 +102,24 @@
         <script>
         $(document).ready(function() {
             $('#table_data').DataTable({
-                ajax: '/admin/customers/ajax',
+                ajax: '/admin/products/ajax',
                 columns: [{
-                        data: 'customer_name'
+                        data: 'product_id'
                     },
                     {
-                        data: 'room.room_name'
-                    },
-
-                    {
-                        data: 'facebook_link'
+                        data: 'product_name'
                     },
                     {
-                        data: 'email'
+                        data: 'product_balance'
                     },
                     {
-                        data: 'phone'
+                        data: 'room_name',
+                        render: function(data, type, row, meta) {
+                            return data ? data : 'N/A';
+                        }
                     },
                     {
                         data: 'date'
-                    },
-                    {
-                        data: 'user.name'
                     }
                 ]
             });
