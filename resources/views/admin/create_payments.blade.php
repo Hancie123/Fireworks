@@ -1,6 +1,6 @@
 @include('layouts.adminnav')
 @push('title')
-<title>Fire Wins | Create Products</title>
+<title>Fire Wins | Create Payments</title>
 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -16,41 +16,122 @@
 
 <div class="main-panel">
     <div class="content-wrapper">
-        <h3><b>All Products</b></h3><br>
+        <h3><b>Create Payment Method</b></h3><br>
 
+
+
+        <div class="container border p-4 w3-round">
+            <form method="post" action="{{url('/admin/payments/create')}}">
+                @csrf
+
+                <input type="hidden" value="{{Session::get('User_ID')}}" name="User_ID" type="text">
+                <input type="hidden" value="<?php echo date('Y-m-d'); ?>" name="date" type="text">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Payment Name</label>
+                        <input class="w3-input w3-border w3-round" name="payment_name" type="text">
+                        <span class="text-danger">
+                            @error('payment_name')
+                            {{$message}}
+                            </script>
+                            @enderror
+                        </span>
+                    </div><br>
+
+                    <div class="col-md-6">
+                        <label>Balance</label>
+                        <input class="w3-input w3-border w3-round" name="balance" type="text">
+                        <span class="text-danger">
+                            @error('balance')
+                            {{$message}}
+                            </script>
+                            @enderror
+                        </span>
+                    </div><br>
+                </div>
+                <br>
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Room Name</label>
+                        <select class="select2 form-control" name="room_id">
+                            @foreach($rooms as $room)
+                            <option value="{{ $room->room_id }}">{{ $room->room_name }}</option>
+                            @endforeach
+                        </select>
+                        <span class="text-danger">
+                            @error('room_id')
+                            {{$message}}
+                            </script>
+                            @enderror
+                        </span>
+                    </div><br>
+
+                    <div class="col-md-6">
+
+                    </div><br>
+                </div>
+                <br>
+
+
+                <br>
+
+                <button type="submit" class="btn btn-primary mb-2">Create</button><br>
+
+
+                @if(Session::has('success'))
+                <div class="alert alert-success w3-display-bottommiddle">
+                    <strong>Success!</strong> {{Session::get('success')}}
+                </div>
+                @endif
+                @if(Session::has('fail'))
+                <div class="alert alert-danger w3-display-bottommiddle">
+                    <strong>Fail!</strong> {{Session::get('fail')}}
+                </div>
+                @endif
+            </form>
+
+        </div>
+        <br><br>
+
+        <!-- Add a table to display the data -->
         <table class="table table-hover table-striped" id="table_data">
             <thead>
                 <tr>
-                    <th>Product ID</th>
-                    <th>Product Name</th>
-                    <th>Product Balance</th>
-                    <th>Room Name</th>
+                    <th>ID</th>
+                    <th>Payment Name</th>
+                    <th>Balance</th>
+                    <th>Room</th>
+                    <th>Admin</th>
                     <th>Date</th>
                 </tr>
             </thead>
+            <tbody>
+            </tbody>
         </table>
 
+        <!-- Add JavaScript to initialize DataTable and fetch data -->
         <script>
         $(document).ready(function() {
             $('#table_data').DataTable({
                 processing: true,
-                ajax: '/admin/products/ajax',
+                ajax: '/admin/payments/ajax',
                 columns: [{
-                        data: 'product_id'
 
-
+                        data: 'payment_id'
                     },
                     {
-                        data: 'product_name'
+                        data: 'payment_name'
                     },
                     {
-                        data: 'product_balance'
+                        data: 'payment_balance'
                     },
                     {
-                        data: 'room_name',
-                        render: function(data, type, row, meta) {
-                            return data ? data : 'N/A';
-                        }
+                        data: 'room.room_name'
+                    },
+                    {
+                        data: 'user.name'
                     },
                     {
                         data: 'date'

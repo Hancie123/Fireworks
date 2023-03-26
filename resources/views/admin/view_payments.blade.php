@@ -1,6 +1,6 @@
 @include('layouts.adminnav')
 @push('title')
-<title>Fire Wins | Create Products</title>
+<title>Fire Wins | View Payments</title>
 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -16,41 +16,45 @@
 
 <div class="main-panel">
     <div class="content-wrapper">
-        <h3><b>All Products</b></h3><br>
+        <h3><b>View All Payment Methods</b></h3><br>
 
+        <!-- Add a table to display the data -->
         <table class="table table-hover table-striped" id="table_data">
             <thead>
                 <tr>
-                    <th>Product ID</th>
-                    <th>Product Name</th>
-                    <th>Product Balance</th>
-                    <th>Room Name</th>
+                    <th>ID</th>
+                    <th>Payment Name</th>
+                    <th>Balance</th>
+                    <th>Room</th>
+                    <th>Admin</th>
                     <th>Date</th>
                 </tr>
             </thead>
+            <tbody>
+            </tbody>
         </table>
 
+        <!-- Add JavaScript to initialize DataTable and fetch data -->
         <script>
         $(document).ready(function() {
             $('#table_data').DataTable({
                 processing: true,
-                ajax: '/admin/products/ajax',
+                ajax: '/admin/payments/ajax',
                 columns: [{
-                        data: 'product_id'
 
-
+                        data: 'payment_id'
                     },
                     {
-                        data: 'product_name'
+                        data: 'payment_name'
                     },
                     {
-                        data: 'product_balance'
+                        data: 'payment_balance'
                     },
                     {
-                        data: 'room_name',
-                        render: function(data, type, row, meta) {
-                            return data ? data : 'N/A';
-                        }
+                        data: 'room.room_name'
+                    },
+                    {
+                        data: 'user.name'
                     },
                     {
                         data: 'date'

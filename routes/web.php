@@ -7,6 +7,7 @@ use App\Http\Controllers\admincontroller;
 use App\Http\Controllers\roomcontroller;
 use App\Http\Controllers\customercontroller;
 use App\Http\Controllers\productcontroller;
+use App\Http\Controllers\paymentcontroller;
 use App\Models\RoomsModel;
 use App\Models\Users;
 
@@ -56,6 +57,12 @@ Route::get('/admin/products/create',[productcontroller::class,'products'])->midd
 Route::post('/admin/products/create',[productcontroller::class,'insertdata'])->middleware('isLoggedIn');
 Route::get('/admin/products/ajax',[productcontroller::class,'getProductsAndRooms'])->middleware('isLoggedIn');
 Route::get('/admin/products/view',[productcontroller::class,'viewproducts'])->middleware('isLoggedIn');
+
+
+Route::get('/admin/payments/create',[paymentcontroller::class,'payment'])->middleware('isLoggedIn');
+Route::post('/admin/payments/create',[paymentcontroller::class,'insertdata'])->middleware('isLoggedIn');
+Route::get('/admin/payments/ajax',[paymentcontroller::class,'getpaymenttable'])->middleware('isLoggedIn');
+Route::get('/admin/payments/view',[paymentcontroller::class,'viewpayments'])->middleware('isLoggedIn');
 
 
 

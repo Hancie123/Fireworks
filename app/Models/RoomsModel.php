@@ -22,8 +22,15 @@ class RoomsModel extends Model
     }
 
     public function products()
-{
+    {
     return $this->hasMany(Products::class);
-}
+    }
+
+    
+
+    public function payments()
+    {
+    return $this->hasMany(Payments::class, 'room_id');
+    }
 
 }

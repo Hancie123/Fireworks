@@ -22,4 +22,11 @@ class Users extends Model
     {
         return $this->hasMany(Customers::class, 'User_ID');
     }
+
+
+    public function payments()
+    {
+    return $this->hasMany(Payments::class, 'User_ID');
+    }
+
 }

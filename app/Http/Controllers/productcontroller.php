@@ -62,5 +62,7 @@ class productcontroller extends Controller
         return view('admin/view_products');
         
     }
+
+    
     
 }

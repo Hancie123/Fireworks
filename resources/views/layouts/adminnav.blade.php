@@ -353,11 +353,11 @@
                         <div class="collapse" id="managepayment">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link"
-                                        href="{{url('/admin/products/create')}}">Create
-                                        Products</a>
+                                        href="{{url('/admin/payments/create')}}">Create
+                                        Payment</a>
                                 </li>
-                                <li class="nav-item"> <a class="nav-link" href="{{url('/admin/products/view')}}">View
-                                        Products</a>
+                                <li class="nav-item"> <a class="nav-link" href="{{url('/admin/payments/view')}}">View
+                                        Payments</a>
                                 </li>
 
                             </ul>
