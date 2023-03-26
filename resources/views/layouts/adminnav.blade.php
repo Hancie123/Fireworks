@@ -320,6 +320,27 @@
                             </ul>
                         </div>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#manageproducts" aria-expanded="false"
+                            aria-controls="manageproducts">
+                            <i class='bx bx-sushi bx-sm mx-1'></i>
+                            <span class="menu-title">Manage Products</span>
+                            <i class='bx bx-chevron-right'></i>
+                        </a>
+                        <div class="collapse" id="manageproducts">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{url('/admin/products/create')}}">Create
+                                        Products</a>
+                                </li>
+                                <li class="nav-item"> <a class="nav-link" href="{{url('/admin/customers/view')}}">View
+                                        Products</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{url('/admin/dashboard/logout')}}">
                             <i class='bx bx-log-out-circle bx-sm mx-1'></i>

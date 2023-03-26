@@ -6,6 +6,7 @@ use App\Http\Controllers\userscontroller;
 use App\Http\Controllers\admincontroller;
 use App\Http\Controllers\roomcontroller;
 use App\Http\Controllers\customercontroller;
+use App\Http\Controllers\productcontroller;
 use App\Models\RoomsModel;
 use App\Models\Users;
 
@@ -48,6 +49,11 @@ Route::get('/admin/customers/create',[customercontroller::class,'customer'])->mi
 Route::post('/admin/customers/create',[customercontroller::class,'insertdata'])->middleware('isLoggedIn');
 Route::get('/admin/customers/ajax',[customercontroller::class,'getCustomers'])->middleware('isLoggedIn');
 Route::get('/admin/customers/view',[customercontroller::class,'viewcustomer'])->middleware('isLoggedIn');
+
+
+
+Route::get('/admin/products/create',[productcontroller::class,'products'])->middleware('isLoggedIn');
+Route::post('/admin/products/create',[productcontroller::class,'insertdata'])->middleware('isLoggedIn');
 
 
 
