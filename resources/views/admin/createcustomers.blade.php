@@ -3,7 +3,6 @@
 <title>Fire Wins Dashboard | Create Customer Accounts</title>
 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
@@ -65,15 +64,13 @@
                 <br>
                 <div class="row">
                     <div class="col-md-6">
-                        <label>Room ID</label>
+                        <label>Room Name</label>
 
-                        <select class="select2 form-control">
-                            <option value="option1">Option 1</option>
-                            <option value="option2">Option 2</option>
-                            <option value="option3">Option 3</option>
-                            <option value="option4">Option 4</option>
+                        <select class="select2 w3-select w3-border w3-round" name="room_id">
+                            @foreach($rooms as $room)
+                            <option value="{{ $room->room_id }}">{{ $room->room_name }}</option>
+                            @endforeach
                         </select>
-
 
                     </div>
 
@@ -173,25 +170,29 @@
 
 
 
-<script src="{{url('assets/js/typeahead.bundle.min.js')}}"></script>
-<script src="{{url('assets/js/typeahead.js')}}"></script>
-<script src="{{url('assets/js/select2.min.js')}}"></script>
+
+
+
+<script>
+$(document).ready(function() {
+    $('.select2').select2({
+        placeholder: 'Select an option',
+        width: '100%'
+    });
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
 
 
 
-</head>
+
+
 
 <body>
 
-    <script>
-    $(document).ready(function() {
-        $('.select2').select2({
-            placeholder: 'Select an option',
-            width: '100%'
-        });
-    });
-    </script>
+
 </body>
 
 </html>
