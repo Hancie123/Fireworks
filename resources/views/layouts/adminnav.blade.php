@@ -363,6 +363,28 @@
                             </ul>
                         </div>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#managetransactions" aria-expanded="false"
+                            aria-controls="managetransactions">
+
+                            <i class='bx bx-transfer-alt bx-sm mx-1'></i>
+                            <span class="menu-title">Manage Transactions</span>
+                            <i class='bx bx-chevron-right'></i>
+                        </a>
+                        <div class="collapse" id="managetransactions">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{url('/admin/transactions/create')}}">Create
+                                        Transactions</a>
+                                </li>
+                                <li class="nav-item"> <a class="nav-link" href="{{url('/admin/payments/view')}}">View
+                                        Transactions</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{url('/admin/dashboard/logout')}}">
                             <i class='bx bx-log-out-circle bx-sm mx-1'></i>
