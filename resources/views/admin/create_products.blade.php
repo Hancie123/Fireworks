@@ -1,6 +1,6 @@
 @include('layouts.adminnav')
 @push('title')
-<title>Fire Wins Dashboard | Create Products</title>
+<title>Fire Wins | Create Products</title>
 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -111,6 +111,7 @@
         $(document).ready(function() {
             $('#table_data').DataTable({
                 ajax: '/admin/products/ajax',
+                processing: true,
                 columns: [{
                         data: 'product_id'
                     },
