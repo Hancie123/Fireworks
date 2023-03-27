@@ -378,7 +378,8 @@
                                         href="{{url('/admin/transactions/create')}}">Create
                                         Transactions</a>
                                 </li>
-                                <li class="nav-item"> <a class="nav-link" href="{{url('/admin/payments/view')}}">View
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{url('/admin/transactions/view')}}">View
                                         Transactions</a>
                                 </li>
 

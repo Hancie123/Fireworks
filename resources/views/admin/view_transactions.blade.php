@@ -1,6 +1,6 @@
 @include('layouts.adminnav')
 @push('title')
-<title>Fire Wins | View Products</title>
+<title>Fire Wins | View Transactions</title>
 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -16,53 +16,92 @@
 
 <div class="main-panel">
     <div class="content-wrapper">
-        <h3><b>All Products</b></h3><br>
+        <h3><b>All Transactions</b></h3><br>
 
         <table class="table table-hover table-striped" id="table_data">
             <thead>
                 <tr>
-                    <th>Product ID</th>
+                    <th>ID</th>
+                    <th>Customer Name</th>
                     <th>Product Name</th>
-                    <th>Room Name</th>
+                    <th>Type</th>
+                    <th>Note</th>
+                    <th>Cash</th>
+                    <th>Credit</th>
+                    <th>Authorizer</th>
+                    <th>Payment Name</th>
                     <th>Date</th>
+
                 </tr>
             </thead>
+            <tbody>
+            </tbody>
         </table>
+
+
 
         <script>
         $(document).ready(function() {
             $('#table_data').DataTable({
-                ajax: '/admin/products/ajax',
-                processing: true,
-                columns: [{
-                        data: 'product_id'
+                "processing": true,
+                "ajax": "/admin/transactions/ajax",
+                "columns": [{
+                        "data": "transaction_id"
                     },
                     {
-                        data: 'product_name'
+                        "data": "name"
+                    },
+                    {
+                        "data": "product_name"
+                    },
+                    {
+                        "data": "type"
+                    },
+                    {
+                        "data": "note"
                     },
 
                     {
-                        data: 'room_name',
-                        render: function(data, type, row, meta) {
-                            return data ? data : 'N/A';
-                        }
+                        "data": "cash"
                     },
                     {
-                        data: 'date'
+                        "data": "Credit"
+                    },
+                    {
+                        "data": "user_name"
+                    },
+                    {
+                        "data": "payment_name"
+                    },
+                    {
+                        "data": "date"
                     }
                 ],
-                dom: 'Bfrtip',
-                buttons: [
-                    'copyHtml5',
-                    'excelHtml5',
-                    'csvHtml5',
-                    'pdfHtml5',
-                    'print'
+                "dom": 'Bfrtip',
+                "buttons": [{
+                        "extend": 'copyHtml5',
+                        "title": 'Transaction Records'
+                    },
+                    {
+                        "extend": 'excelHtml5',
+                        "title": 'Transaction Records'
+                    },
+                    {
+                        "extend": 'csvHtml5',
+                        "title": 'Transaction Records'
+                    },
+                    {
+                        "extend": 'pdfHtml5',
+                        "title": 'Transaction Records'
+                    },
+                    {
+                        "extend": 'print',
+                        "title": 'Transaction Records'
+                    }
                 ]
             });
         });
         </script>
-
 
         <style>
         /* Change the background color of the table header */

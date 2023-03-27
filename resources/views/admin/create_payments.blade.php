@@ -39,21 +39,6 @@
                     </div><br>
 
                     <div class="col-md-6">
-                        <label>Balance</label>
-                        <input class="w3-input w3-border w3-round" name="balance" type="text">
-                        <span class="text-danger">
-                            @error('balance')
-                            {{$message}}
-                            </script>
-                            @enderror
-                        </span>
-                    </div><br>
-                </div>
-                <br>
-
-
-                <div class="row">
-                    <div class="col-md-6">
                         <label>Room Name</label>
                         <select class="select2 form-control" name="room_id">
                             @foreach($rooms as $room)
@@ -66,10 +51,6 @@
                             </script>
                             @enderror
                         </span>
-                    </div><br>
-
-                    <div class="col-md-6">
-
                     </div><br>
                 </div>
                 <br>
@@ -101,7 +82,6 @@
                 <tr>
                     <th>ID</th>
                     <th>Payment Name</th>
-                    <th>Balance</th>
                     <th>Room</th>
                     <th>Admin</th>
                     <th>Date</th>
@@ -124,9 +104,7 @@
                     {
                         data: 'payment_name'
                     },
-                    {
-                        data: 'payment_balance'
-                    },
+
                     {
                         data: 'room.room_name'
                     },
@@ -214,6 +192,14 @@
             color: white;
             background-color: #3f3e91;
             border-color: #0056b3;
+        }
+        </style>
+
+
+        <style>
+        .select2-container .select2-selection--single {
+            height: calc(2.25rem + 2px) !important;
+
         }
         </style>
     </div>

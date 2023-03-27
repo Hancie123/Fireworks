@@ -27,6 +27,24 @@ class transactioncontroller extends Controller
 
     public function insertdata(Request $request){
 
+
+        $request->validate(
+            
+            [
+                'cash_identifier'=>'required',
+                'customer_name'=>'required',
+                'game_name'=>'required',
+                'type'=>'required',
+                'payment_method'=>'required',
+                'sender_receiver_id'=>'required',
+                'note'=>'required',
+                'cash'=>'required',
+                'credit'=>'required',
+                'room_id'=>'required',
+            
+            ]
+            );
+
         
 
         
@@ -105,4 +123,27 @@ class transactioncontroller extends Controller
         
         
     }
+
+    public function getTransactions()
+        {
+    $transactions = Transactions::join('customers', 'transactions.customer_id', '=', 'customers.customer_id')
+    ->join('products', 'transactions.product_id', '=', 'products.product_id')
+    ->join('users', 'transactions.User_ID', '=', 'users.User_ID')
+    ->join('payments', 'transactions.payment_id', '=', 'payments.payment_id')
+    ->select('transactions.transaction_id', 'transactions.type', 'transactions.note', 
+    'transactions.cash', 'transactions.Credit','transactions.date', 
+    'customers.customer_name as name', 'products.product_name as product_name', 
+    'users.name as user_name', 'payments.payment_name as payment_name')
+    ->get();
+
+
+        return response()->json(['data' => $transactions]);
+
+        }
+
+    public function viewtransactions(){
+        
+        return view('admin/view_transactions');
+    }
+
 }

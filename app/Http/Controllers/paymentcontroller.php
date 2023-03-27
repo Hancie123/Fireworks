@@ -21,13 +21,11 @@ class paymentcontroller extends Controller
 
         $request->validate([
             'payment_name'=>'required',
-            'balance'=>'required | numeric',
             
         ]);
 
         $payment= new Payments;
         $payment->payment_name=$request['payment_name'];
-        $payment->payment_balance=$request['balance'];
         $payment->date=$request['date'];
         $payment->room_id=$request['room_id'];
         $payment->User_ID=$request['User_ID'];

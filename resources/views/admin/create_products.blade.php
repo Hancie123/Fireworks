@@ -39,21 +39,6 @@
                     </div><br>
 
                     <div class="col-md-6">
-                        <label>Product Balance</label>
-                        <input class="w3-input w3-border w3-round" name="balance" type="text">
-                        <span class="text-danger">
-                            @error('email')
-                            {{$message}}
-                            </script>
-                            @enderror
-                        </span>
-                    </div><br>
-                </div>
-                <br>
-
-
-                <div class="row">
-                    <div class="col-md-6">
                         <label>Room Name</label>
                         <select class="select2 form-control" name="room_id">
                             @foreach($rooms as $room)
@@ -66,13 +51,14 @@
                             </script>
                             @enderror
                         </span>
-                    </div><br>
-
-                    <div class="col-md-6">
 
                     </div><br>
                 </div>
                 <br>
+
+
+
+
 
 
                 <br>
@@ -100,7 +86,6 @@
                 <tr>
                     <th>Product ID</th>
                     <th>Product Name</th>
-                    <th>Product Balance</th>
                     <th>Room Name</th>
                     <th>Date</th>
                 </tr>
@@ -118,9 +103,7 @@
                     {
                         data: 'product_name'
                     },
-                    {
-                        data: 'product_balance'
-                    },
+
                     {
                         data: 'room_name',
                         render: function(data, type, row, meta) {
@@ -142,6 +125,13 @@
             });
         });
         </script>
+
+        <style>
+        .select2-container .select2-selection--single {
+            height: calc(2.25rem + 2px) !important;
+
+        }
+        </style>
 
 
         <style>

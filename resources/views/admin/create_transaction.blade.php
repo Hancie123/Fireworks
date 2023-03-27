@@ -209,9 +209,164 @@
         <br><br>
 
 
+        <table class="table table-hover table-striped" id="table_data">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Customer Name</th>
+                    <th>Product Name</th>
+                    <th>Type</th>
+                    <th>Note</th>
+                    <th>Cash</th>
+                    <th>Credit</th>
+                    <th>Authorizer</th>
+                    <th>Payment Name</th>
+                    <th>Date</th>
+
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+
+
+        <script>
+        $(document).ready(function() {
+            $('#table_data').DataTable({
+                "processing": true,
+                "ajax": "/admin/transactions/ajax",
+                "columns": [{
+                        "data": "transaction_id"
+                    },
+                    {
+                        "data": "name"
+                    },
+                    {
+                        "data": "product_name"
+                    },
+                    {
+                        "data": "type"
+                    },
+                    {
+                        "data": "note"
+                    },
+
+                    {
+                        "data": "cash"
+                    },
+                    {
+                        "data": "Credit"
+                    },
+                    {
+                        "data": "user_name"
+                    },
+                    {
+                        "data": "payment_name"
+                    },
+                    {
+                        "data": "date"
+                    }
+                ],
+                "dom": 'Bfrtip',
+                "buttons": [{
+                        "extend": 'copyHtml5',
+                        "title": 'Transaction Records'
+                    },
+                    {
+                        "extend": 'excelHtml5',
+                        "title": 'Transaction Records'
+                    },
+                    {
+                        "extend": 'csvHtml5',
+                        "title": 'Transaction Records'
+                    },
+                    {
+                        "extend": 'pdfHtml5',
+                        "title": 'Transaction Records'
+                    },
+                    {
+                        "extend": 'print',
+                        "title": 'Transaction Records'
+                    }
+                ]
+
+            });
+        });
+        </script>
+
+
+
     </div>
 </div>
 </div>
+
+<style>
+/* Change the background color of the table header */
+#table_data thead {
+    background-color: rgb(63, 62, 145);
+    color: #fff;
+}
+
+/* Change the font size and weight of the table header */
+#table_data th {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Change the background color and font size of the table rows */
+#table_data tbody tr {
+    background-color: #f8f9fa;
+    font-size: 14px;
+}
+
+/* Add hover effect to the table rows */
+#table_data tbody tr:hover {
+    background-color: #e2e6ea;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    font-size: 14px;
+    padding: 6px;
+    width: 300px;
+    border-radius: 5px;
+}
+
+.dataTables_wrapper .dataTables_filter label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Change the background color of the DataTable buttons */
+.dataTables_wrapper .dt-buttons button {
+    background-color: #3f3e91;
+    color: white;
+}
+
+/* Change the background color of the DataTable buttons on hover */
+.dataTables_wrapper .dt-buttons button:hover {
+    background-color: #3e8e41;
+    color: white;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: white;
+    background-color: #3f3e91;
+    border-color: #007bff;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    color: #fff;
+    background-color: #3e8e41;
+    border-color: #0056b3;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    color: white;
+    background-color: #3f3e91;
+    border-color: #0056b3;
+}
+</style>
 
 <style>
 .select2-container .select2-selection--single {

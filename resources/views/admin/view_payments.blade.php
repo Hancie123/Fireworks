@@ -24,7 +24,6 @@
                 <tr>
                     <th>ID</th>
                     <th>Payment Name</th>
-                    <th>Balance</th>
                     <th>Room</th>
                     <th>Admin</th>
                     <th>Date</th>
@@ -47,9 +46,7 @@
                     {
                         data: 'payment_name'
                     },
-                    {
-                        data: 'payment_balance'
-                    },
+
                     {
                         data: 'room.room_name'
                     },

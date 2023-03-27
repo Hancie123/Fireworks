@@ -22,13 +22,12 @@ class productcontroller extends Controller
 
         $request->validate([
             'product_name'=>'required',
-            'balance'=>'required | numeric',
+            
             
         ]);
 
         $product= new Products;
         $product->product_name=$request['product_name'];
-        $product->product_balance=$request['balance'];
         $product->date=$request['date'];
         $product->room_id=$request['room_id'];
         $product->User_ID=$request['User_ID'];
@@ -47,12 +46,9 @@ class productcontroller extends Controller
 {
     $products = DB::table('products')
                     ->leftJoin('rooms', 'products.room_id', '=', 'rooms.room_id')
-                    ->select('products.product_id', 'products.product_name', 'products.product_balance', 'products.room_id', 'products.date', 'rooms.room_name')
-                    ->get()
-                    ->map(function ($product) {
-                        $product->product_balance = number_format($product->product_balance, 2);
-                        return $product;
-                    });
+                    ->select('products.product_id', 'products.product_name', 'products.room_id', 'products.date', 'rooms.room_name')
+                    ->get();
+                    
 
         return response()->json(['data' =>$products]);
 }
