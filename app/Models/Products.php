@@ -11,6 +11,8 @@ class Products extends Model
     protected $table='products';
     protected $primaryKey='product_id';
 
+    
+
     public function room()
 {
     return $this->belongsTo(RoomsModel::class);

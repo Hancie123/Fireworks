@@ -67,6 +67,7 @@ Route::get('/admin/payments/view',[paymentcontroller::class,'viewpayments'])->mi
 
 
 Route::get('/admin/transactions/create',[transactioncontroller::class,'transactions'])->middleware('isLoggedIn');
+Route::post('/admin/transactions/create',[transactioncontroller::class,'insertdata'])->middleware('isLoggedIn');
 
 
 

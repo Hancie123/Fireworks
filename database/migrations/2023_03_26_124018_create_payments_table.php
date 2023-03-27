@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id('payment_id');
             $table->string('payment_name');
-            $table->bigInteger('payment_balance');
             $table->unsignedBigInteger('room_id');
             $table->foreign('room_id')->references('room_id')->on('rooms');
             $table->unsignedBigInteger('User_ID');
