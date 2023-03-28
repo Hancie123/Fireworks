@@ -391,6 +391,23 @@
                             </ul>
                         </div>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#manageexpenses" aria-expanded="false"
+                            aria-controls="manageexpenses">
+                            <i class='bx bx-money bx-sm mx-1'></i>
+                            <span class="menu-title">Manage Expenses</span>
+                            <i class='bx bx-chevron-right'></i>
+                        </a>
+                        <div class="collapse" id="manageexpenses">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{url('/admin/expenses/create')}}">Withdraw Money</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{url('/admin/dashboard/logout')}}">
                             <i class='bx bx-log-out-circle bx-sm mx-1'></i>

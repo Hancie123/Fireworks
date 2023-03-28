@@ -48,4 +48,45 @@ class workertransactioncontroller extends Controller
         return view('workers/create_transactions',compact('rooms','customers','games',
         'payments','access_controls','countrooms','access_controls2'));
     }
+
+
+    public function getTransactions()
+        {
+    $transactions = Transactions::join('customers', 'transactions.customer_id', '=', 'customers.customer_id')
+    ->join('products', 'transactions.product_id', '=', 'products.product_id')
+    ->join('users', 'transactions.User_ID', '=', 'users.User_ID')
+    ->join('payments', 'transactions.payment_id', '=', 'payments.payment_id')
+    ->select('transactions.transaction_id', 'transactions.type', 'transactions.note', 
+    'transactions.cash', 'transactions.Credit','transactions.date', 
+    'customers.customer_name as name', 'products.product_name as product_name', 
+    'users.name as user_name', 'payments.payment_name as payment_name')
+    ->get();
+
+
+        return response()->json(['data' => $transactions]);
+
+        }
+
+    public function viewtransactions(){
+
+        $user_id = session('User_ID');
+
+        $access_controls = DB::table('access_control')
+         ->join('rooms', 'access_control.room_id', '=', 'rooms.room_id')
+         ->where('access_control.User_ID', $user_id)
+         ->select('access_control.User_ID', 'access_control.status', 'rooms.room_name','access_control.room_id')
+         ->get();
+
+        $access_controls2 = DB::table('rooms')
+            ->join('access_control', 'rooms.room_id', '=', 'access_control.room_id')
+            ->select('rooms.room_name','rooms.room_id')
+            ->where('access_control.User_ID', '=', 2)
+            ->where('access_control.status', '=', DB::raw('rooms.room_id'))
+            ->get();
+
+        
+        $countrooms = Access_Control::where('User_ID', $user_id)->count();
+        
+        return view('workers/view_transaction',compact('access_controls2','countrooms','access_controls'));
+    }
 }

@@ -1,31 +1,26 @@
 @include('layouts.adminnav')
 @push('title')
-<title>Fire Wins | Create Payments</title>
-
+<title>Fire Wins | Expenses</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-
 
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
 <script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
-
-
 <div class="main-panel">
     <div class="content-wrapper">
-        <h3><b>Assign Worker Rooms</b></h3><br>
+        <h3><b>Create Expenses Record</b></h3><br>
 
 
 
         <div class="container border p-4 w3-round">
-            <form method="post" action="{{url('/admin/workers/accesscontrol')}}">
 
-
+            <form method="post" action="{{url('/admin/expenses/create')}}">
                 @if(Session::has('success'))
                 <script>
                 toastr.success("{{Session::get('success')}}")
@@ -39,18 +34,12 @@
                 @csrf
 
                 <input type="hidden" value="{{Session::get('User_ID')}}" name="User_ID" type="text">
-                <input type="hidden" value="<?php echo date('Y-m-d'); ?>" name="date" type="text">
                 <div class="row">
                     <div class="col-md-6">
-                        <label>Worker Name</label>
-                        <select class="select2 form-control" name="worker_name">
-                            <option value="">Select an Option</option>
-                            @foreach($users as $data)
-                            <option value="{{$data->User_ID}}">{{ $data->name }}</option>
-                            @endforeach
-                        </select>
+                        <label>Date:</label>
+                        <input type="date" class="w3-input w3-border w3-round" name="date">
                         <span class="text-danger">
-                            @error('worker_name')
+                            @error('date')
                             {{$message}}
                             </script>
                             @enderror
@@ -58,15 +47,10 @@
                     </div><br>
 
                     <div class="col-md-6">
-                        <label>Room Name</label>
-                        <select class="select2 form-control" name="room_name">
-                            <option value="">Select an Option</option>
-                            @foreach($rooms as $room)
-                            <option value="{{$room->room_id}}">{{ $room->room_name }}</option>
-                            @endforeach
-                        </select>
+                        <label>Remarks</label>
+                        <input class="w3-input w3-border w3-round" name="remarks" type="text">
                         <span class="text-danger">
-                            @error('room_name')
+                            @error('remarks')
                             {{$message}}
                             </script>
                             @enderror
@@ -76,55 +60,74 @@
                 <br>
 
 
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Amount</label>
+                        <input class="w3-input w3-border w3-round" name="amount" type="text">
+                        <span class="text-danger">
+                            @error('amount')
+                            {{$message}}
+                            </script>
+                            @enderror
+                        </span>
+                    </div><br>
+
+                    <div class="col-md-6">
+
+                    </div><br>
+                </div>
                 <br>
 
-                <button type="submit" class="btn btn-primary mb-2">Assign Room</button><br>
-                @if(Session::has('fail'))
-                <div class="alert alert-danger w3-display-bottommiddle">
-                    <strong>Fail!</strong> {{Session::get('fail')}}
-                </div>
-                @endif
+
+                <br>
+
+                <button type="submit" class="btn btn-primary mb-2">Create</button><br>
             </form>
 
         </div>
         <br><br>
 
-        <!-- Add a table to display the data -->
         <table class="table table-hover table-striped" id="table_data">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>Customer Name</th>
                     <th>Room Name</th>
-                    <th>Worker Name</th>
-                    <th>Delete</th>
 
+                    <th>Facebook Link</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Date</th>
+                    <th>Created by</th>
                 </tr>
             </thead>
-            <tbody>
-            </tbody>
         </table>
 
-        <!-- Add JavaScript to initialize DataTable and fetch data -->
         <script>
         $(document).ready(function() {
             $('#table_data').DataTable({
+                ajax: '/admin/customers/ajax',
                 processing: true,
-                ajax: '/admin/workers/accessajax',
                 columns: [{
-                        data: 'access_id'
+                        data: 'customer_name'
                     },
                     {
-                        data: 'room_name'
+                        data: 'room.room_name'
+                    },
+
+                    {
+                        data: 'facebook_link'
                     },
                     {
-                        data: 'name'
+                        data: 'email'
                     },
                     {
-                        data: null,
-                        render: function(data, type, row) {
-                            return '<button class="btn btn-danger btn-sm" onclick="deleteAccess(' +
-                                row.access_id + ')">Delete</button>';
-                        }
+                        data: 'phone'
+                    },
+                    {
+                        data: 'date'
+                    },
+                    {
+                        data: 'user.name'
                     }
                 ],
                 dom: 'Bfrtip',
@@ -137,31 +140,7 @@
                 ]
             });
         });
-
-        function deleteAccess(access_id) {
-            if (confirm('Are you sure you want to delete this access record?')) {
-                $.ajax({
-                    url: '/admin/workers/delete/' + access_id,
-                    type: 'GET',
-                    data: {
-                        _method: 'DELETE'
-                    },
-                    success: function(response) {
-                        if (response.status === 'success') {
-                            toastr.success(response.message);
-                            $('#table_data').DataTable().ajax.reload();
-                        } else {
-                            toastr.error(response.message);
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
-            }
-        }
         </script>
-
 
 
         <style>
@@ -228,14 +207,6 @@
             color: white;
             background-color: #3f3e91;
             border-color: #0056b3;
-        }
-        </style>
-
-
-        <style>
-        .select2-container .select2-selection--single {
-            height: calc(2.25rem + 2px) !important;
-
         }
         </style>
     </div>

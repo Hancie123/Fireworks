@@ -12,6 +12,7 @@ use App\Http\Controllers\transactioncontroller;
 use App\Http\Controllers\workercontroller;
 use App\Http\Controllers\accesscontroller;
 use App\Http\Controllers\workertransactioncontroller;
+use App\Http\Controllers\expensescontroller;
 use App\Models\RoomsModel;
 use App\Models\Users;
 
@@ -40,6 +41,9 @@ Route::post('/admin/workers/create',[userscontroller::class,'insertworkeraccount
 Route::get('/admin/workers/ajax',[userscontroller::class,'workerdata'])->middleware('isLoggedIn');
 Route::get('/admin/workers/accesscontrol',[accesscontroller::class,'accessworker'])->middleware('isLoggedIn');
 Route::post('/admin/workers/accesscontrol',[accesscontroller::class,'insertdata'])->middleware('isLoggedIn');
+Route::get('/admin/workers/accessajax',[accesscontroller::class,'accesscontroltable'])->middleware('isLoggedIn');
+Route::get('/admin/workers/delete/{id}', [accesscontroller::class, 'deleteAccessControl'])->middleware('isLoggedIn');
+
 
 
 Route::get('/admin/rooms/create',[roomcontroller::class,'rooms'])->middleware('isLoggedIn');
@@ -57,7 +61,8 @@ Route::post('/admin/customers/create',[customercontroller::class,'insertdata'])-
 Route::get('/admin/customers/ajax',[customercontroller::class,'getCustomers'])->middleware('isLoggedIn');
 Route::get('/admin/customers/view',[customercontroller::class,'viewcustomer'])->middleware('isLoggedIn');
 
-
+Route::get('/admin/expenses/create',[expensescontroller::class,'expenses'])->middleware('isLoggedIn');
+Route::post('/admin/expenses/create',[expensescontroller::class,'insertdata'])->middleware('isLoggedIn');
 
 Route::get('/admin/products/create',[productcontroller::class,'products'])->middleware('isLoggedIn');
 Route::post('/admin/products/create',[productcontroller::class,'insertdata'])->middleware('isLoggedIn');
@@ -77,15 +82,14 @@ Route::get('/admin/transactions/ajax',[transactioncontroller::class,'getTransact
 Route::get('/admin/transactions/view',[transactioncontroller::class,'viewtransactions'])->middleware('isLoggedIn');
 
 
-
-
 Route::get('/worker/dashboard', [workercontroller::class, 'dashboard'])
     ->middleware(['isLoggedIn', 'workerstatus']);
 Route::post('/worker/dashboard', [workercontroller::class, 'switchrooms'])->middleware(['isLoggedIn', 'workerstatus']);
 
 
 Route::get('/worker/transactions/create', [workertransactioncontroller::class, 'transaction'])->middleware(['isLoggedIn', 'workerstatus']);
-
+Route::get('/worker/transactions/view', [workertransactioncontroller::class, 'viewtransactions'])->middleware(['isLoggedIn', 'workerstatus']);
+Route::get('/worker/transactions/ajax', [workertransactioncontroller::class, 'getTransactions'])->middleware(['isLoggedIn', 'workerstatus']);
 
 
 Route::post('/users',[userscontroller::class,'saveusers']);

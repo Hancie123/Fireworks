@@ -48,7 +48,7 @@ class workercontroller extends Controller
          
          $countrooms = Access_Control::where('User_ID', $user_id)->count();
 
-         $countrooms = Access_Control::where('User_ID', $user_id)->count();
+        
 
             
             

@@ -160,7 +160,7 @@
                                         Transactions</a>
                                 </li>
                                 <li class="nav-item"> <a class="nav-link"
-                                        href="{{url('/admin/transactions/view')}}">View
+                                        href="{{url('/worker/transactions/view')}}">View
                                         Transactions</a>
                                 </li>
 
