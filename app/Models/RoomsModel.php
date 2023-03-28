@@ -33,4 +33,9 @@ class RoomsModel extends Model
     return $this->hasMany(Payments::class, 'room_id');
     }
 
+    public function accessControls()
+    {
+        return $this->hasMany(Access_Control::class);
+    }
+
 }

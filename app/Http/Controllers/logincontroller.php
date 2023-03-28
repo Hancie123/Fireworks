@@ -48,7 +48,10 @@ class logincontroller extends Controller
              
         } elseif ($user->email === $credentials['email1'] && $user->role == 'Worker') {
 
-            return back()->with('success','Welcome Worker');
+            $request->session()->put('Loginid',$user->User_ID);
+            $request->session()->put('role',$user->role);
+            return redirect('/worker/dashboard')->with('success','Welcome Worker');
+
             
             
         }

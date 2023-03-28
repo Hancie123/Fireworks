@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AuthCheck
+class CheckWorkerStatus
 {
     /**
      * Handle an incoming request.
@@ -15,9 +15,10 @@ class AuthCheck
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!Session()->has('Loginid')){
-            return redirect('/')->with('fail','You need to login first!');
+
+        if (session('role') != 'Worker') {
+            return redirect('/')->with('fail', 'You are not a worker!');
         }
-        return $next($request); 
+        return $next($request);
     }
 }

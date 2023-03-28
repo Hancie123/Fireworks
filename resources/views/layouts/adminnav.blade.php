@@ -281,6 +281,11 @@
                                         Accounts</a>
                                 </li>
 
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{url('/admin/workers/accesscontrol')}}">Access
+                                        Control</a>
+                                </li>
+
                             </ul>
                         </div>
                     </li>
