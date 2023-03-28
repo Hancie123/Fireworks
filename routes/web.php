@@ -11,6 +11,7 @@ use App\Http\Controllers\paymentcontroller;
 use App\Http\Controllers\transactioncontroller;
 use App\Http\Controllers\workercontroller;
 use App\Http\Controllers\accesscontroller;
+use App\Http\Controllers\workertransactioncontroller;
 use App\Models\RoomsModel;
 use App\Models\Users;
 
@@ -82,7 +83,8 @@ Route::get('/worker/dashboard', [workercontroller::class, 'dashboard'])
     ->middleware(['isLoggedIn', 'workerstatus']);
 Route::post('/worker/dashboard', [workercontroller::class, 'switchrooms'])->middleware(['isLoggedIn', 'workerstatus']);
 
-Route::get('/worker/transactions/create', [workercontroller::class, 'transaction'])->middleware(['isLoggedIn', 'workerstatus']);
+
+Route::get('/worker/transactions/create', [workertransactioncontroller::class, 'transaction'])->middleware(['isLoggedIn', 'workerstatus']);
 
 
 

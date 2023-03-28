@@ -161,31 +161,16 @@
 
                 </div>
 
-                <br>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <label> Room<sup class="text-danger fw-bold">*</sup></label>
-                        <select class="select2 form-control" name="room_id">
-                            <option value="">Select an Option</option>
-                            @foreach($rooms as $room)
-                            <option value="{{ $room->room_id }}">{{ $room->room_name }}</option>
-                            @endforeach
-                        </select>
 
-                        <span class="text-danger">
-                            @error('room_id')
-                            {{$message}}
 
-                            @enderror
-                        </span>
-                    </div>
-                    <div class="col-sm-4">
-                        <!-- Column 2 content -->
-                    </div>
-                    <div class="col-sm-4">
-                        <!-- Column 3 content -->
-                    </div>
-                </div>
+                @foreach ($access_controls2 as $data)
+
+                <input type="hidden" value="{{$data->room_id}}" name="room_id" type="text">
+                @break
+                @endforeach
+
+
+
 
 
                 <br> <br>

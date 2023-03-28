@@ -40,11 +40,10 @@
                     $user_id = session('User_ID');
                     @endphp
 
-                    @foreach ($access_controls as $data)
-                    @if ($data->User_ID == $user_id)
-                    <p>{{ $data->status }}</p>
+                    @foreach ($access_controls2 as $data)
+                    <p>{{ $data->room_name  }}</p>
                     @break
-                    @endif
+
                     @endforeach
                 </a>
 
@@ -201,7 +200,7 @@
                                 <select class="form-control" name="room_name">
                                     <option value="">Select an Option</option>
                                     @foreach($access_controls as $data)
-                                    <option value="{{$data->room_name}}">{{$data->room_name }}
+                                    <option value="{{$data->room_id}}">{{$data->room_name }}
                                     </option>
                                     @endforeach
                                 </select>
