@@ -14,10 +14,25 @@ use App\Models\Payments;
 use App\Models\Transactions;
 use App\Models\Payment_Balance;
 use App\Models\Product_Balance;
+use App\Models\ClockModel;
 
 class workercontroller extends Controller
+
+
+
 {
-    public function dashboard(){
+
+    public function switchrooms(Request $request) {
+        
+        $room_name = $request->input('room_name');
+        $user_id = session('User_ID');
+        Access_Control::where('User_ID', $user_id)->update(['status' => $room_name]);
+        Session::put('room_name', $room_name);
+        return back();
+    }
+
+    
+    public function dashboard(Request $request){
 
         $data=array();
         if(Session::has('Loginid')){
@@ -38,7 +53,7 @@ class workercontroller extends Controller
          $access_controls2 = DB::table('rooms')
             ->join('access_control', 'rooms.room_id', '=', 'access_control.room_id')
             ->select('rooms.room_name','rooms.room_id')
-            ->where('access_control.User_ID', '=', 2)
+            ->where('access_control.User_ID', '=', $user_id)
             ->where('access_control.status', '=', DB::raw('rooms.room_id'))
             ->get();
 
@@ -47,21 +62,52 @@ class workercontroller extends Controller
 
          
          $countrooms = Access_Control::where('User_ID', $user_id)->count();
+         
+         $countclockinstatus = ClockModel::where('User_ID', $user_id)
+                                 ->where('currentstatus', 'CheckIn')
+                                 ->where('currentstatus', '<>', 'CheckOut')
+                                 ->orderBy('created_at', 'desc')
+                                 ->count();
 
+        $countclockoutstatus = ClockModel::where('User_ID', $user_id)
+                    ->where('currentstatus', 'CheckOut')
+                    ->where('currentstatus', '<>', 'CheckIn')
+                    ->orderBy('created_at', 'desc')
+                    ->count();
+
+        $room_name = session('room_name');
         
+        $cashin = DB::table('payment_balance')
+                    ->select(DB::raw('SUM(cash_balance)'))
+                    ->where('User_ID', '=', $user_id)
+                    ->where('room_id', '=', $room_name)
+                    ->where('status', '=', "Deposit")
+                    ->get();
 
-            
+        $cashout = DB::table('payment_balance')
+                    ->select(DB::raw('SUM(cash_balance)'))
+                    ->where('User_ID', '=', $user_id)
+                    ->where('room_id', '=', $room_name)
+                    ->where('status', '=', "Withdraw")
+                    ->get();
+
+                    $grosscashamount = DB::table('payment_balance')
+                    ->select(DB::raw('SUM(CASE WHEN status = "Deposit" THEN cash_balance ELSE -cash_balance END) as gross_cash_amount'))
+                    ->where('User_ID', '=', $user_id)
+                    ->where('room_id', '=', $room_name)
+                    ->whereIn('status', ['Deposit', 'Withdraw'])
+                    ->get();
+
+
+
+       
             
         }
-        return view('workers/dashboard',compact('access_controls','countrooms','access_controls2'));
+        return view('workers/dashboard',compact('access_controls',
+        'countrooms','access_controls2','countclockinstatus','countclockoutstatus','cashin','cashout','grosscashamount'));
     }
 
-    public function switchrooms(Request $request) {
-        $room_name = $request->input('room_name');
-        $user_id = session('User_ID');
-        Access_Control::where('User_ID', $user_id)->update(['status' => $room_name]);
-        return back();
-    }
+    
 
 
     

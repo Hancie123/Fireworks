@@ -13,6 +13,7 @@ use App\Http\Controllers\workercontroller;
 use App\Http\Controllers\accesscontroller;
 use App\Http\Controllers\workertransactioncontroller;
 use App\Http\Controllers\expensescontroller;
+use App\Http\Controllers\clockcontroller;
 use App\Models\RoomsModel;
 use App\Models\Users;
 
@@ -82,6 +83,12 @@ Route::post('/admin/transactions/create',[transactioncontroller::class,'insertda
 Route::get('/admin/transactions/ajax',[transactioncontroller::class,'getTransactions'])->middleware('isLoggedIn');
 Route::get('/admin/transactions/view',[transactioncontroller::class,'viewtransactions'])->middleware('isLoggedIn');
 
+
+
+Route::post('/admin/newclockin',[clockcontroller::class,'newclockindata'])->middleware('isLoggedIn'); 
+Route::post('/admin/clockin',[clockcontroller::class,'checkindata'])->middleware('isLoggedIn'); 
+Route::post('/admin/clockout',[clockcontroller::class,'checkoutdata'])->middleware('isLoggedIn'); 
+Route::post('/admin/statuscheckin',[clockcontroller::class,'checkcheckin'])->middleware('isLoggedIn'); 
 
 Route::get('/worker/dashboard', [workercontroller::class, 'dashboard'])
     ->middleware(['isLoggedIn', 'workerstatus']);

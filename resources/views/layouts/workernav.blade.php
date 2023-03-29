@@ -194,7 +194,7 @@
 
 
                             @if($countrooms>=1)
-                            <form method="post" action="{{url('/worker/dashboard')}}">
+                            <form method="POST" action="{{url('/worker/dashboard')}}">
                                 @csrf
                                 <input type="hidden" value="{{Session::get('User_ID')}}" name="User_ID" type="text">
                                 <select class="form-control" name="room_name">
