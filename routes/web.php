@@ -63,6 +63,7 @@ Route::get('/admin/customers/view',[customercontroller::class,'viewcustomer'])->
 
 Route::get('/admin/expenses/create',[expensescontroller::class,'expenses'])->middleware('isLoggedIn');
 Route::post('/admin/expenses/create',[expensescontroller::class,'insertdata'])->middleware('isLoggedIn');
+Route::get('/admin/expenses/ajaxtable',[expensescontroller::class,'getexpenses'])->middleware('isLoggedIn');
 
 Route::get('/admin/products/create',[productcontroller::class,'products'])->middleware('isLoggedIn');
 Route::post('/admin/products/create',[productcontroller::class,'insertdata'])->middleware('isLoggedIn');

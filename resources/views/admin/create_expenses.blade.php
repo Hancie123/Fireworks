@@ -90,14 +90,11 @@
         <table class="table table-hover table-striped" id="table_data">
             <thead>
                 <tr>
-                    <th>Customer Name</th>
-                    <th>Room Name</th>
-
-                    <th>Facebook Link</th>
-                    <th>Email</th>
-                    <th>Phone</th>
+                    <th>ID</th>
                     <th>Date</th>
-                    <th>Created by</th>
+                    <th>Amount</th>
+                    <th>Remarks</th>
+                    <th>Created By</th>
                 </tr>
             </thead>
         </table>
@@ -105,30 +102,29 @@
         <script>
         $(document).ready(function() {
             $('#table_data').DataTable({
-                ajax: '/admin/customers/ajax',
+                ajax: '/admin/expenses/ajaxtable',
                 processing: true,
                 columns: [{
-                        data: 'customer_name'
-                    },
-                    {
-                        data: 'room.room_name'
-                    },
-
-                    {
-                        data: 'facebook_link'
-                    },
-                    {
-                        data: 'email'
-                    },
-                    {
-                        data: 'phone'
+                        data: 'expenses_id'
                     },
                     {
                         data: 'date'
                     },
+
                     {
-                        data: 'user.name'
-                    }
+                        data: 'amount',
+                        render: function(data, type, row) {
+                            // format the amount with comma separators
+                            return parseFloat(data).toLocaleString('en-US');
+                        }
+                    },
+                    {
+                        data: 'remarks'
+                    },
+                    {
+                        data: 'name'
+                    },
+
                 ],
                 dom: 'Bfrtip',
                 buttons: [

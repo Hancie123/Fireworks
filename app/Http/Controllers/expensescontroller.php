@@ -37,4 +37,16 @@ class expensescontroller extends Controller
             }
         
     }
+
+
+    public function getexpenses(){
+        
+
+    $expesnestable = ExpensesModel::join('users', 'users.User_ID', '=', 'expenses.User_ID')
+    ->select('expenses.expenses_id', 'expenses.date', 'expenses.amount','expenses.remarks','users.name')
+    ->get();
+
+
+    return response()->json(['data' => $expesnestable]);
+    }
 }
