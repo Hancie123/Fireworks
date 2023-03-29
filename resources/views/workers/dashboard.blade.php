@@ -245,6 +245,35 @@
                 </div>
             </div>
         </div>
+        <br>
+        <div class="row">
+            <div class="card-deck">
+                @foreach ($gamedata as $data)
+                <div class="col-sm-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-body">
+                                <h5 class="card-title"><b>{{ $data->product_name }}</b></h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon bg-primary p-1 rounded-circle d-flex align-items-center">
+                                        <i class='bx bx-dollar-circle bx-md text-warning'></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h3>{{$data->gross_credit_amount}}
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+
+            </div>
+
+        </div>
+
+
 
 
 

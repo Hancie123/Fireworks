@@ -91,7 +91,7 @@ class workercontroller extends Controller
                     ->where('status', '=', "Withdraw")
                     ->get();
 
-                    $grosscashamount = DB::table('payment_balance')
+        $grosscashamount = DB::table('payment_balance')
                     ->select(DB::raw('SUM(CASE WHEN status = "Deposit" THEN cash_balance ELSE -cash_balance END) as gross_cash_amount'))
                     ->where('User_ID', '=', $user_id)
                     ->where('room_id', '=', $room_name)
@@ -99,12 +99,21 @@ class workercontroller extends Controller
                     ->get();
 
 
-
+        $gamedata=DB::table('products as p')
+                    ->select('p.product_name', DB::raw('(SELECT SUM(CASE WHEN status = "Deposit" 
+                    THEN credit_balance ELSE -credit_balance END) FROM product_balance WHERE 
+                    product_id = p.product_id) as gross_credit_amount'))
+                    ->join('product_balance as pb', 'pb.product_id', '=', 'p.product_id')
+                    ->where('pb.room_id', '=', $room_name)
+                    ->groupBy('p.product_id','p.product_name')
+                    ->get();
+                
        
             
         }
         return view('workers/dashboard',compact('access_controls',
-        'countrooms','access_controls2','countclockinstatus','countclockoutstatus','cashin','cashout','grosscashamount'));
+        'countrooms','access_controls2','countclockinstatus',
+        'countclockoutstatus','cashin','cashout','grosscashamount','gamedata'));
     }
 
     
