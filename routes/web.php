@@ -60,7 +60,7 @@ Route::get('/roomsdata', function () {
 
 
 Route::get('/admin/customers/create',[customercontroller::class,'customer'])->middleware('isLoggedIn','adminstatus');
-Route::post('/admin/customers/create',[customercontroller::class,'insertdata'])->middleware('isLoggedIn','adminstatus');
+Route::post('/admin/customers/create',[customercontroller::class,'insertdata'])->middleware('isLoggedIn');
 Route::get('/admin/customers/ajax',[customercontroller::class,'getCustomers'])->middleware('isLoggedIn','adminstatus');
 Route::get('/admin/customers/view',[customercontroller::class,'viewcustomer'])->middleware('isLoggedIn','adminstatus');
 
@@ -81,8 +81,8 @@ Route::get('/admin/payments/view',[paymentcontroller::class,'viewpayments'])->mi
 
 
 Route::get('/admin/transactions/create',[transactioncontroller::class,'transactions'])->middleware('isLoggedIn','adminstatus');
-Route::post('/admin/transactions/create',[transactioncontroller::class,'insertdata'])->middleware('isLoggedIn','adminstatus');
-Route::get('/admin/transactions/ajax',[transactioncontroller::class,'getTransactions'])->middleware('isLoggedIn','adminstatus');
+Route::post('/admin/transactions/create',[transactioncontroller::class,'insertdata'])->middleware('isLoggedIn');
+Route::get('/admin/transactions/ajax',[transactioncontroller::class,'getTransactions'])->middleware('isLoggedIn');
 Route::get('/admin/transactions/view',[transactioncontroller::class,'viewtransactions'])->middleware('isLoggedIn','adminstatus');
 Route::get('/admin/transactions/delete/{id}', [transactioncontroller::class, 'deletetransaction'])->middleware('isLoggedIn','adminstatus');
 
