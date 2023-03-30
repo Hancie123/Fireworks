@@ -37,20 +37,20 @@ Route::get('/',[logincontroller::class,'login']);
 Route::post('/',[logincontroller::class,'logincheck']);
 Route::get('/admin/dashboard/logout',[admincontroller::class,'logout']);
 
-Route::get('/admin/dashboard',[admincontroller::class,'admin'])->middleware('isLoggedIn');
+Route::get('/admin/dashboard',[admincontroller::class,'admin'])->middleware('isLoggedIn','adminstatus');
 
-Route::get('/admin/workers/create',[userscontroller::class,'workeraccounts'])->middleware('isLoggedIn');
-Route::post('/admin/workers/create',[userscontroller::class,'insertworkeraccount'])->middleware('isLoggedIn');
-Route::get('/admin/workers/ajax',[userscontroller::class,'workerdata'])->middleware('isLoggedIn');
-Route::get('/admin/workers/accesscontrol',[accesscontroller::class,'accessworker'])->middleware('isLoggedIn');
-Route::post('/admin/workers/accesscontrol',[accesscontroller::class,'insertdata'])->middleware('isLoggedIn');
-Route::get('/admin/workers/accessajax',[accesscontroller::class,'accesscontroltable'])->middleware('isLoggedIn');
-Route::get('/admin/workers/delete/{id}', [accesscontroller::class, 'deleteAccessControl'])->middleware('isLoggedIn');
+Route::get('/admin/workers/create',[userscontroller::class,'workeraccounts'])->middleware('isLoggedIn','adminstatus');
+Route::post('/admin/workers/create',[userscontroller::class,'insertworkeraccount'])->middleware('isLoggedIn','adminstatus');
+Route::get('/admin/workers/ajax',[userscontroller::class,'workerdata'])->middleware('isLoggedIn','adminstatus');
+Route::get('/admin/workers/accesscontrol',[accesscontroller::class,'accessworker'])->middleware('isLoggedIn','adminstatus');
+Route::post('/admin/workers/accesscontrol',[accesscontroller::class,'insertdata'])->middleware('isLoggedIn','adminstatus');
+Route::get('/admin/workers/accessajax',[accesscontroller::class,'accesscontroltable'])->middleware('isLoggedIn','adminstatus');
+Route::get('/admin/workers/delete/{id}', [accesscontroller::class, 'deleteAccessControl'])->middleware('isLoggedIn','adminstatus');
 
 
 
-Route::get('/admin/rooms/create',[roomcontroller::class,'rooms'])->middleware('isLoggedIn');
-Route::post('/admin/rooms/create',[roomcontroller::class,'insertdata'])->middleware('isLoggedIn');
+Route::get('/admin/rooms/create',[roomcontroller::class,'rooms'])->middleware('isLoggedIn','adminstatus');
+Route::post('/admin/rooms/create',[roomcontroller::class,'insertdata'])->middleware('isLoggedIn','adminstatus');
 Route::get('/roomsdata', function () {
     $rooms = RoomsModel::select('room_id', 'room_name', 'name')
                  ->join('users', 'rooms.User_ID', '=', 'users.User_ID')
@@ -59,40 +59,40 @@ Route::get('/roomsdata', function () {
 });
 
 
-Route::get('/admin/customers/create',[customercontroller::class,'customer'])->middleware('isLoggedIn');
-Route::post('/admin/customers/create',[customercontroller::class,'insertdata'])->middleware('isLoggedIn');
-Route::get('/admin/customers/ajax',[customercontroller::class,'getCustomers'])->middleware('isLoggedIn');
-Route::get('/admin/customers/view',[customercontroller::class,'viewcustomer'])->middleware('isLoggedIn');
+Route::get('/admin/customers/create',[customercontroller::class,'customer'])->middleware('isLoggedIn','adminstatus');
+Route::post('/admin/customers/create',[customercontroller::class,'insertdata'])->middleware('isLoggedIn','adminstatus');
+Route::get('/admin/customers/ajax',[customercontroller::class,'getCustomers'])->middleware('isLoggedIn','adminstatus');
+Route::get('/admin/customers/view',[customercontroller::class,'viewcustomer'])->middleware('isLoggedIn','adminstatus');
 
-Route::get('/admin/expenses/create',[expensescontroller::class,'expenses'])->middleware('isLoggedIn');
-Route::post('/admin/expenses/create',[expensescontroller::class,'insertdata'])->middleware('isLoggedIn');
-Route::get('/admin/expenses/ajaxtable',[expensescontroller::class,'getexpenses'])->middleware('isLoggedIn');
+Route::get('/admin/expenses/create',[expensescontroller::class,'expenses'])->middleware('isLoggedIn','adminstatus');
+Route::post('/admin/expenses/create',[expensescontroller::class,'insertdata'])->middleware('isLoggedIn','adminstatus');
+Route::get('/admin/expenses/ajaxtable',[expensescontroller::class,'getexpenses'])->middleware('isLoggedIn','adminstatus');
 
-Route::get('/admin/products/create',[productcontroller::class,'products'])->middleware('isLoggedIn');
-Route::post('/admin/products/create',[productcontroller::class,'insertdata'])->middleware('isLoggedIn');
-Route::get('/admin/products/ajax',[productcontroller::class,'getProductsAndRooms'])->middleware('isLoggedIn');
-Route::get('/admin/products/view',[productcontroller::class,'viewproducts'])->middleware('isLoggedIn');
-
-
-Route::get('/admin/payments/create',[paymentcontroller::class,'payment'])->middleware('isLoggedIn');
-Route::post('/admin/payments/create',[paymentcontroller::class,'insertdata'])->middleware('isLoggedIn');
-Route::get('/admin/payments/ajax',[paymentcontroller::class,'getpaymenttable'])->middleware('isLoggedIn');
-Route::get('/admin/payments/view',[paymentcontroller::class,'viewpayments'])->middleware('isLoggedIn');
+Route::get('/admin/products/create',[productcontroller::class,'products'])->middleware('isLoggedIn','adminstatus');
+Route::post('/admin/products/create',[productcontroller::class,'insertdata'])->middleware('isLoggedIn','adminstatus');
+Route::get('/admin/products/ajax',[productcontroller::class,'getProductsAndRooms'])->middleware('isLoggedIn','adminstatus');
+Route::get('/admin/products/view',[productcontroller::class,'viewproducts'])->middleware('isLoggedIn','adminstatus');
 
 
-Route::get('/admin/transactions/create',[transactioncontroller::class,'transactions'])->middleware('isLoggedIn');
-Route::post('/admin/transactions/create',[transactioncontroller::class,'insertdata'])->middleware('isLoggedIn');
-Route::get('/admin/transactions/ajax',[transactioncontroller::class,'getTransactions'])->middleware('isLoggedIn');
-Route::get('/admin/transactions/view',[transactioncontroller::class,'viewtransactions'])->middleware('isLoggedIn');
-Route::get('/admin/transactions/delete/{id}', [transactioncontroller::class, 'deletetransaction'])->middleware('isLoggedIn');
-
-Route::get('/admin/announcement/create',[announcementcontroller::class,'announce'])->middleware('isLoggedIn');
-Route::post('/admin/announcement/create',[announcementcontroller::class,'makeannouncement'])->middleware('isLoggedIn');
-Route::get('/admin/announcement/delete/{id}',[announcementcontroller::class,'deletedata'])->middleware('isLoggedIn');
+Route::get('/admin/payments/create',[paymentcontroller::class,'payment'])->middleware('isLoggedIn','adminstatus');
+Route::post('/admin/payments/create',[paymentcontroller::class,'insertdata'])->middleware('isLoggedIn','adminstatus');
+Route::get('/admin/payments/ajax',[paymentcontroller::class,'getpaymenttable'])->middleware('isLoggedIn','adminstatus');
+Route::get('/admin/payments/view',[paymentcontroller::class,'viewpayments'])->middleware('isLoggedIn','adminstatus');
 
 
-Route::get('/admin/chat',[chatcontroller::class,'adminchat'])->middleware('isLoggedIn');
-Route::post('/admin/chat',[chatcontroller::class,'insertchat'])->middleware('isLoggedIn');
+Route::get('/admin/transactions/create',[transactioncontroller::class,'transactions'])->middleware('isLoggedIn','adminstatus');
+Route::post('/admin/transactions/create',[transactioncontroller::class,'insertdata'])->middleware('isLoggedIn','adminstatus');
+Route::get('/admin/transactions/ajax',[transactioncontroller::class,'getTransactions'])->middleware('isLoggedIn','adminstatus');
+Route::get('/admin/transactions/view',[transactioncontroller::class,'viewtransactions'])->middleware('isLoggedIn','adminstatus');
+Route::get('/admin/transactions/delete/{id}', [transactioncontroller::class, 'deletetransaction'])->middleware('isLoggedIn','adminstatus');
+
+Route::get('/admin/announcement/create',[announcementcontroller::class,'announce'])->middleware('isLoggedIn','adminstatus');
+Route::post('/admin/announcement/create',[announcementcontroller::class,'makeannouncement'])->middleware('isLoggedIn','adminstatus');
+Route::get('/admin/announcement/delete/{id}',[announcementcontroller::class,'deletedata'])->middleware('isLoggedIn','adminstatus');
+
+
+Route::get('/admin/chat',[chatcontroller::class,'adminchat'])->middleware('isLoggedIn','adminstatus');
+Route::post('/admin/chat',[chatcontroller::class,'insertchat'])->middleware('isLoggedIn','adminstatus');
 
 Route::post('/admin/newclockin',[clockcontroller::class,'newclockindata'])->middleware('isLoggedIn'); 
 Route::post('/admin/clockin',[clockcontroller::class,'checkindata'])->middleware('isLoggedIn'); 

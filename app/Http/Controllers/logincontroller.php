@@ -42,6 +42,7 @@ class logincontroller extends Controller
         // set the user role based on email and password provided
         if ($user->email === $credentials['email1'] && $user->role == 'Admin') {
             $request->session()->put('Loginid',$user->User_ID);
+            $request->session()->put('role',$user->role);
             return redirect('/admin/dashboard');
             
 

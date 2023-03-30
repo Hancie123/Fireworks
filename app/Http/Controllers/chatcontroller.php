@@ -30,9 +30,15 @@ class chatcontroller extends Controller
             ->where('access_control.status', '=', DB::raw('rooms.room_id'))
             ->get();
 
+        $access_controls = DB::table('access_control')
+            ->join('rooms', 'access_control.room_id', '=', 'rooms.room_id')
+            ->where('access_control.User_ID', $user_id)
+            ->select('access_control.User_ID', 'access_control.status', 'rooms.room_name','access_control.room_id')
+            ->get();
+
         $viewchat=ChatModel::orderBy('chat_id','desc')->get();
         
-        return view('workers/chat',compact('viewchat','access_controls2','countrooms'));
+        return view('workers/chat',compact('viewchat','access_controls2','countrooms','access_controls'));
     }
 
 

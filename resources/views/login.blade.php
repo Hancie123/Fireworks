@@ -37,10 +37,10 @@
                                     <form class="row g-3 needs-validation" method="post" action="{{url('/')}}"
                                         id="loginForm">
                                         @if(Session::has('success'))
-                                        <label class="text-success">{{Session::get('success')}}</label>
+                                        <div class="alert  alert-success">{{Session::get('success')}}</div>
                                         @endif
                                         @if(Session::has('fail'))
-                                        <label class="text-danger">{{Session::get('fail')}}</label>
+                                        <div class="alert  alert-danger">{{Session::get('fail')}}</div>
                                         @endif
                                         @csrf
 
