@@ -108,4 +108,6 @@ Route::get('/worker/transactions/view', [workertransactioncontroller::class, 'vi
 Route::get('/worker/transactions/ajax', [workertransactioncontroller::class, 'getTransactions'])->middleware(['isLoggedIn', 'workerstatus']);
 
 
+Route::get('/worker/chat', [chatcontroller::class, 'workerchat'])->middleware(['isLoggedIn', 'workerstatus']);
+
 Route::post('/users',[userscontroller::class,'saveusers']);

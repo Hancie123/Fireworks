@@ -12,6 +12,12 @@ class clockcontroller extends Controller
 
     public function newclockindata(Request $request){
 
+        $request->validate(
+            [
+                "room_id"=>"required"
+            ]
+            );
+
 
         if (ClockModel::where('User_ID',$request['User_ID'])->where('status', "CheckIn")->exists()) {
             // Record already exists, do something
@@ -86,7 +92,7 @@ class clockcontroller extends Controller
 
          } else {
 
-
+            
             $clockin= new ClockModel;
             $clockin->checkout=$request['checkout'];
             $clockin->date=$request['date'];

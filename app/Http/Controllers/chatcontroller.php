@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ChatModel;
+use DB;
+use App\Models\Access_Control;
 
 class chatcontroller extends Controller
 {
@@ -13,6 +15,24 @@ class chatcontroller extends Controller
         $viewchat=ChatModel::orderBy('chat_id','desc')->get();
         
         return view('admin/chat',compact('viewchat'));
+    }
+
+    public function workerchat(){
+
+        $user_id = session('User_ID');
+
+        $countrooms = Access_Control::where('User_ID', $user_id)->count();
+
+        $access_controls2 = DB::table('rooms')
+            ->join('access_control', 'rooms.room_id', '=', 'access_control.room_id')
+            ->select('rooms.room_name','rooms.room_id')
+            ->where('access_control.User_ID', '=', $user_id)
+            ->where('access_control.status', '=', DB::raw('rooms.room_id'))
+            ->get();
+
+        $viewchat=ChatModel::orderBy('chat_id','desc')->get();
+        
+        return view('workers/chat',compact('viewchat','access_controls2','countrooms'));
     }
 
 

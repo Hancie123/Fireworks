@@ -43,8 +43,8 @@ class workercontroller extends Controller
             Session::put('email',$data->email);
 
 
-            $user_id = session('User_ID');
-            $access_controls = DB::table('access_control')
+        $user_id = session('User_ID');
+        $access_controls = DB::table('access_control')
          ->join('rooms', 'access_control.room_id', '=', 'rooms.room_id')
          ->where('access_control.User_ID', $user_id)
          ->select('access_control.User_ID', 'access_control.status', 'rooms.room_name','access_control.room_id')

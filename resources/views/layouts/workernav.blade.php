@@ -146,7 +146,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url('/admin/chat')}}">
+                        <a class="nav-link" href="{{url('/worker/chat')}}">
                             <i class='bx bx-chat bx-sm mx-1'></i>
                             <span class="menu-title">Firewinz Chat</span>
                         </a>

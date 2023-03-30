@@ -17,6 +17,13 @@
 <div class="main-panel">
     <div class="content-wrapper">
 
+        <!-- Check Room Exit Before Clock In -->
+        @error('room_id')
+        <script>
+        toastr.error("{{$message}}")
+        </script>
+        @enderror
+
         <!--------------------- The Announcement Modal -------------------->
         @if($countannouncement >=1)
         <div class="modal fade" id="announcementmodel">

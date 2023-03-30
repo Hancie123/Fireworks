@@ -1,4 +1,4 @@
-@include('layouts.adminnav')
+@include('layouts.workernav')
 @push('title')
 <title>Fire Wins | Create Payments</title>
 
