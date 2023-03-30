@@ -146,4 +146,16 @@ class transactioncontroller extends Controller
         return view('admin/view_transactions');
     }
 
+    public function deletetransaction($id) {
+        $transaction = Transactions::find($id);
+    
+        if ($transaction) {
+            $transaction->delete();
+    
+            return response()->json(['status' => 'success', 'message' => 'Transaction record deleted successfully.']);
+        } else {
+            return response()->json(['status' => 'error', 'message' => 'Transaction record not found.']);
+        }
+    }
+
 }

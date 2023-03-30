@@ -84,6 +84,7 @@ Route::get('/admin/transactions/create',[transactioncontroller::class,'transacti
 Route::post('/admin/transactions/create',[transactioncontroller::class,'insertdata'])->middleware('isLoggedIn');
 Route::get('/admin/transactions/ajax',[transactioncontroller::class,'getTransactions'])->middleware('isLoggedIn');
 Route::get('/admin/transactions/view',[transactioncontroller::class,'viewtransactions'])->middleware('isLoggedIn');
+Route::get('/admin/transactions/delete/{id}', [transactioncontroller::class, 'deletetransaction'])->middleware('isLoggedIn');
 
 Route::get('/admin/announcement/create',[announcementcontroller::class,'announce'])->middleware('isLoggedIn');
 Route::post('/admin/announcement/create',[announcementcontroller::class,'makeannouncement'])->middleware('isLoggedIn');

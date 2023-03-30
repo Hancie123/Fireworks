@@ -96,7 +96,7 @@
                     <th>ID</th>
                     <th>Room Name</th>
                     <th>Worker Name</th>
-                    <th>Delete</th>
+
 
                 </tr>
             </thead>
@@ -119,13 +119,7 @@
                     {
                         data: 'name'
                     },
-                    {
-                        data: null,
-                        render: function(data, type, row) {
-                            return '<button class="btn btn-danger btn-sm" onclick="deleteAccess(' +
-                                row.access_id + ')">Delete</button>';
-                        }
-                    }
+
                 ],
                 dom: 'Bfrtip',
                 buttons: [
@@ -137,29 +131,6 @@
                 ]
             });
         });
-
-        function deleteAccess(access_id) {
-            if (confirm('Are you sure you want to delete this access record?')) {
-                $.ajax({
-                    url: '/admin/workers/delete/' + access_id,
-                    type: 'GET',
-                    data: {
-                        _method: 'DELETE'
-                    },
-                    success: function(response) {
-                        if (response.status === 'success') {
-                            toastr.success(response.message);
-                            $('#table_data').DataTable().ajax.reload();
-                        } else {
-                            toastr.error(response.message);
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
-            }
-        }
         </script>
 
 

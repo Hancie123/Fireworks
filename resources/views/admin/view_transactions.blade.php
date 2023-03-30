@@ -2,6 +2,8 @@
 @push('title')
 <title>Fire Wins | View Transactions</title>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
@@ -31,6 +33,7 @@
                     <th>Authorizer</th>
                     <th>Payment Name</th>
                     <th>Date</th>
+                    <th>Delete</th>
 
                 </tr>
             </thead>
@@ -75,6 +78,12 @@
                     },
                     {
                         "data": "date"
+                    }, {
+                        data: null,
+                        render: function(data, type, row) {
+                            return '<button class="btn btn-danger btn-sm" onclick="deleteAccess(' +
+                                row.transaction_id + ')">Delete</button>';
+                        }
                     }
                 ],
                 "dom": 'Bfrtip',
@@ -101,6 +110,29 @@
                 ]
             });
         });
+
+        function deleteAccess(transaction_id) {
+            if (confirm('Are you sure you want to delete this transaction record?')) {
+                $.ajax({
+                    url: '/admin/transactions/delete/' + transaction_id,
+                    type: 'GET',
+                    data: {
+                        _method: 'DELETE'
+                    },
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            toastr.success(response.message);
+                            $('#table_data').DataTable().ajax.reload();
+                        } else {
+                            toastr.error(response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+        }
         </script>
 
         <style>
