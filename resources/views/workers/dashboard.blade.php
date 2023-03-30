@@ -18,6 +18,48 @@
     <div class="content-wrapper">
 
 
+        @if($announceall != null && !session('announcementModalOpened'))
+        <!--------------------- The Announcement Modal -------------------->
+        <div class="modal fade" id="announcementmodel">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        @foreach($announceall as $data)
+                        <h4 class="modal-title">{{$data->title}}</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <p style="font-size: 20px">{!!$data->announcement!!}</p><br>
+
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <p class="text-start">Posted: {{$data['created_at']->todatestring()}}</p>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+                    </div>
+                    @endforeach
+
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+        $(document).ready(function() {
+            $("#announcementmodel").modal('show');
+            sessionStorage.setItem('announcementModalOpened', true);
+        });
+        </script>
+        @else
+        @endif
+
+
+
 
 
 

@@ -15,6 +15,7 @@ use App\Models\Transactions;
 use App\Models\Payment_Balance;
 use App\Models\Product_Balance;
 use App\Models\ClockModel;
+use App\Models\AnnouncementModel;
 
 class workercontroller extends Controller
 
@@ -92,7 +93,8 @@ class workercontroller extends Controller
                     ->get();
 
         $grosscashamount = DB::table('payment_balance')
-                    ->select(DB::raw('SUM(CASE WHEN status = "Deposit" THEN cash_balance ELSE -cash_balance END) as gross_cash_amount'))
+                    ->select(DB::raw('SUM(CASE WHEN status = "Deposit" THEN cash_balance ELSE 
+                    -cash_balance END) as gross_cash_amount'))
                     ->where('User_ID', '=', $user_id)
                     ->where('room_id', '=', $room_name)
                     ->whereIn('status', ['Deposit', 'Withdraw'])
@@ -107,13 +109,16 @@ class workercontroller extends Controller
                     ->where('pb.room_id', '=', $room_name)
                     ->groupBy('p.product_id','p.product_name')
                     ->get();
+
+        $countannouncement=AnnouncementModel::count();
+        $announceall=AnnouncementModel::all();
                 
        
             
         }
         return view('workers/dashboard',compact('access_controls',
         'countrooms','access_controls2','countclockinstatus',
-        'countclockoutstatus','cashin','cashout','grosscashamount','gamedata'));
+        'countclockoutstatus','cashin','cashout','grosscashamount','gamedata','countannouncement','announceall'));
     }
 
     

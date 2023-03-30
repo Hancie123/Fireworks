@@ -268,6 +268,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{url('/admin/announcement/create')}}">
+                            <i class='bx bx-user-voice bx-sm mx-1'></i>
+                            <span class="menu-title">Make Announcements</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#workeraccount" aria-expanded="false"
                             aria-controls="workeraccount">
                             <i class='bx bxs-user-account bx-sm mx-1'></i>
