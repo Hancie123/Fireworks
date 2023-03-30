@@ -12,6 +12,7 @@ use App\Models\Customers;
 use App\Models\ExpensesModel;
 use App\Models\Products;
 use App\Models\Transactions;
+use DB;
 
 class admincontroller extends Controller
 {
@@ -31,10 +32,14 @@ class admincontroller extends Controller
         $totalAmount = ExpensesModel::sum('amount');
         $countproducts=Products::count();
         $counttransactions=Transactions::count();
+        $customers = Customers::select('date', DB::raw('count(*) as count'))
+                ->groupBy('date')
+                ->orderBy('date')
+                ->pluck('count', 'date');
 
         
         return view('admin/dashboard',compact('viewchat',
-        'workerCount','countrooms','countcustomer','totalAmount','countproducts','counttransactions'));
+        'workerCount','countrooms','countcustomer','totalAmount','countproducts','counttransactions','customers'));
     }
 
     public function logout(){

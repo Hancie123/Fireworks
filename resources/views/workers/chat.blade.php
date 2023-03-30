@@ -24,7 +24,7 @@
 
         <div class="container border p-4 w3-round">
 
-            <div class="container border p-3 overflow-auto" style="height:50vh;">
+            <div class="container border p-3 overflow-auto" style="height:55vh;">
 
                 @foreach($viewchat as $data)
 

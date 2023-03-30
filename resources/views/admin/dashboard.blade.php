@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
 
 
+
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
 <script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
@@ -17,8 +18,6 @@
     <div class="content-wrapper">
         <h3>Welcome {{Session('name')}}</h3>
         <br>
-
-
         <div class="container">
             <div class="row">
                 <div class="col-md-8 mt-2">
@@ -42,7 +41,7 @@
 
 
 
-                            <!-- Earnings (Monthly) Card Example -->
+                            <!-- Total Rooms -->
                             <div class="card w3-leftbar w3-border-blue shadow py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -59,7 +58,7 @@
                             </div><br>
 
 
-                            <!-- Earnings (Monthly) Card Example -->
+                            <!-- Total Customers -->
                             <div class="card w3-leftbar w3-border-blue shadow py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -80,7 +79,7 @@
 
 
                         <div class="col-md-6">
-                            <!-- Earnings (Monthly) Card Example -->
+                            <!-- Total Expenses -->
 
                             <div class="card w3-leftbar w3-border-blue shadow py-2">
                                 <div class="card-body">
@@ -100,7 +99,7 @@
                             </div><br>
 
 
-                            <!-- Earnings (Monthly) Card Example -->
+                            <!-- Total Games -->
                             <div class="card w3-leftbar w3-border-blue shadow py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -116,7 +115,7 @@
                                 </div>
                             </div><br>
 
-                            <!-- Earnings (Monthly) Card Example -->
+                            <!-- Total Transactions -->
                             <div class="card w3-leftbar w3-border-blue shadow py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -197,6 +196,9 @@
             <tbody>
             </tbody>
         </table>
+
+
+
 
 
 
@@ -291,6 +293,9 @@
             }
         }
         </script>
+
+
+
 
         <style>
         /* Change the background color of the table header */
