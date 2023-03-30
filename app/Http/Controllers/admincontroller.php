@@ -6,6 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Session;
 use App\Models\Users;
+use App\Models\ChatModel;
+use App\Models\RoomsModel;
+use App\Models\Customers;
+use App\Models\ExpensesModel;
+use App\Models\Products;
+use App\Models\Transactions;
 
 class admincontroller extends Controller
 {
@@ -18,7 +24,17 @@ class admincontroller extends Controller
             Session::put('email',$data->email);
             
         }
-        return view('admin/dashboard');
+        $viewchat=ChatModel::orderBy('chat_id','desc')->limit(3)->get();
+        $workerCount = Users::where('role', '=', 'Worker')->count();
+        $countrooms=RoomsModel::count();
+        $countcustomer=Customers::count();
+        $totalAmount = ExpensesModel::sum('amount');
+        $countproducts=Products::count();
+        $counttransactions=Transactions::count();
+
+        
+        return view('admin/dashboard',compact('viewchat',
+        'workerCount','countrooms','countcustomer','totalAmount','countproducts','counttransactions'));
     }
 
     public function logout(){
