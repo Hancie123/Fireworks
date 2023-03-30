@@ -87,10 +87,10 @@
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                             aria-labelledby="profileDropdown">
                             <a class="dropdown-item">
-                                <i class='bx bx-cog text-primary'></i>
-                                Settings
+                                <i class='bx bx-user text-primary'></i>
+                                {{Session('name')}}
                             </a>
-                            <a class="dropdown-item">
+                            <a class="dropdown-item" href="{{url('/admin/dashboard/logout')}}">
                                 <i class='bx bx-log-out-circle text-primary'></i>
                                 Logout
                             </a>

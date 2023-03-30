@@ -29,4 +29,15 @@ class Users extends Model
     return $this->hasMany(Payments::class, 'User_ID');
     }
 
+    public function chat()
+    {
+        return $this->hasMany(ChatModel::class);
+    }
+
+    public function setOnlineStatus($status)
+    {
+        $this->online = $status;
+        $this->save();
+    }
+
 }

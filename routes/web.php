@@ -15,6 +15,7 @@ use App\Http\Controllers\workertransactioncontroller;
 use App\Http\Controllers\expensescontroller;
 use App\Http\Controllers\clockcontroller;
 use App\Http\Controllers\announcementcontroller;
+use App\Http\Controllers\chatcontroller;
 use App\Models\RoomsModel;
 use App\Models\Users;
 
@@ -87,6 +88,10 @@ Route::get('/admin/transactions/view',[transactioncontroller::class,'viewtransac
 Route::get('/admin/announcement/create',[announcementcontroller::class,'announce'])->middleware('isLoggedIn');
 Route::post('/admin/announcement/create',[announcementcontroller::class,'makeannouncement'])->middleware('isLoggedIn');
 Route::get('/admin/announcement/delete/{id}',[announcementcontroller::class,'deletedata'])->middleware('isLoggedIn');
+
+
+Route::get('/admin/chat',[chatcontroller::class,'adminchat'])->middleware('isLoggedIn');
+Route::post('/admin/chat',[chatcontroller::class,'insertchat'])->middleware('isLoggedIn');
 
 Route::post('/admin/newclockin',[clockcontroller::class,'newclockindata'])->middleware('isLoggedIn'); 
 Route::post('/admin/clockin',[clockcontroller::class,'checkindata'])->middleware('isLoggedIn'); 
