@@ -17,9 +17,8 @@
 <div class="main-panel">
     <div class="content-wrapper">
 
-
-        @if($announceall != null && !session('announcementModalOpened'))
         <!--------------------- The Announcement Modal -------------------->
+        @if($countannouncement >=1)
         <div class="modal fade" id="announcementmodel">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -33,6 +32,7 @@
 
                     <!-- Modal body -->
                     <div class="modal-body">
+
                         <p style="font-size: 20px">{!!$data->announcement!!}</p><br>
 
                     </div>
@@ -48,24 +48,25 @@
                 </div>
             </div>
         </div>
-
-        <script type="text/javascript">
-        $(document).ready(function() {
-            $("#announcementmodel").modal('show');
-            sessionStorage.setItem('announcementModalOpened', true);
-        });
-        </script>
         @else
         @endif
 
+        <script type="text/javascript">
+        window.onload = function() {
+            OpenBootstrapPopup();
+        };
+
+        function OpenBootstrapPopup() {
+            $("#announcementmodel").modal('show');
+        }
+        </script>
+        <!--------------------- The End Announcement Modal -------------------->
 
 
 
 
 
-
-
-
+        <!-------------------- The Welcome Message Card ------------------------->
         <div class=" card-deck">
             <div class="card shadow">
                 <div class="card-body">
@@ -214,14 +215,7 @@
 
 
 
-
-
-
-
-
-
-
-
+        <!-------------------- The Cash Inlow and Outflow Card ------------------------->
         <div class="card-deck">
             <div class="card">
                 <div class="card-body">
@@ -287,7 +281,10 @@
                 </div>
             </div>
         </div>
+        <!-------------------- The End Cash Inlow and Outflow Card ------------------------->
         <br>
+
+        <!-------------------- The Game Data Card ------------------------->
         <div class="row">
             <div class="card-deck">
                 @foreach ($gamedata as $data)
@@ -314,6 +311,7 @@
             </div>
 
         </div>
+        <!-------------------- The End Game Data Card ------------------------->
 
 
 

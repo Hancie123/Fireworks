@@ -146,6 +146,13 @@
                     </li>
 
                     <li class="nav-item">
+                        <a class="nav-link" href="{{url('/admin/chat')}}">
+                            <i class='bx bx-chat bx-sm mx-1'></i>
+                            <span class="menu-title">Firewinz Chat</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#managetransactions" aria-expanded="false"
                             aria-controls="managetransactions">
 
